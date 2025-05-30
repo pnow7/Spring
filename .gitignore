@@ -1,0 +1,14 @@
+# STS / Eclipse
+.settings/
+.project
+.classpath
+
+# Build
+/target/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
