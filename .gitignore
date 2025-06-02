@@ -1,15 +1,35 @@
-# STS / Eclipse
+# STS / Eclipse 관련
 .settings/
 .project
 .classpath
+.metadata/  
+*.iml
+*.log
 
-# Build
+# 빌드 결과물
+/bin/
+/build/
 /target/
 
-# OS
+# OS별 불필요한 파일
 .DS_Store
 Thumbs.db
 
-# Logs
-*.log
-/.metadata/
+# IDE 관련
+*.sw?
+.idea/
+.vscode/
+
+# Maven 관련
+.mvn/
+!**/src/main/**
+!**/src/test/**
+dependency-reduced-pom.xml
+release.properties
+pom.xml.tag
+pom.xml.releaseBackup
+
+# 기타
+*.war
+*.jar
+*.class
