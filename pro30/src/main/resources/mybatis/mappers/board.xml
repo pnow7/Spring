@@ -3,7 +3,9 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!-- 네임스페이스를 변경 -->
 <mapper namespace="mapper.board">
+	<!-- 글 정보를 저장할 resultMap을 설정 -->
 	<resultMap id="articlesResult" type="articleVO">
 		<result property="level" column="level" />
 		<result property="articleNO" column="articleNO" />
@@ -13,7 +15,8 @@
 		<result property="writeDate" column="writeDate" />
 		<result property="imageFileName" column="imageFileName" />
 	</resultMap>
-
+	
+	<!-- 모든 글을 조회하는 SQL문 작성 -->
 	<select id="selectAllArticlesList" resultMap="articlesResult">
     <![CDATA[
       SELECT level, articleNO, parentNO, title, content, writeDate, imageFileName, id 

@@ -60,6 +60,7 @@ public class MemberVO {
 		this.joinDate = joinDate;
 	}
 	
+	// 회원 속성 정보를 출력
 	@Override
 	public String toString() {
 		return "MemberVO [id="+id + ", pwd=" + pwd + ", name = " + name + ", email=" + email + "]";

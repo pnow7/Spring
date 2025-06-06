@@ -12,14 +12,17 @@ import org.springframework.web.servlet.ModelAndView;
 public class ResController {
 
 	@RequestMapping(value = "/res1")
-	@ResponseBody
+	@ResponseBody // 메서드 호출 시 데이터를 전송하도록 설정
+	
+	// Map 데이터를 브라우저로 전송
 	public Map<String, Object> res1() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", "dooly");
 		map.put("name", "둘리");
 		return map;
 	}
-
+	
+	// 메서드 호출 시 home.jsp를 브라우저로 전송
 	@RequestMapping(value = "/res2")
 	public ModelAndView res2() {
 		return new ModelAndView("home");

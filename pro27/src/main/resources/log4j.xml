@@ -2,6 +2,11 @@
 <!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
+<!--
+	실제 App에서는 유지관리를 위해 웹 사이트에 접속한 사용자 정보나
+	각 클래스의 메서드 호출 시각 등 여러 가지 정보를 파일로 저장해서 관리하기 위한 것이
+	log4j
+-->
 	<!-- Appenders -->
 	<appender name="console" class="org.apache.log4j.ConsoleAppender">
 		<param name="Target" value="System.out" />

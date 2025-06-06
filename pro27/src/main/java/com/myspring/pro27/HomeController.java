@@ -22,6 +22,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	// 모든 요청에 대해 home() 메서드 호출
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
@@ -31,6 +32,7 @@ public class HomeController {
 		
 		String formattedDate = dateFormat.format(date);
 		
+		// 브라우저에서 요청한 시각을 JSP로 전달
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";

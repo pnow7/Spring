@@ -116,15 +116,28 @@ request.setCharacterEncoding("UTF-8");
 			</tr>
 
 			<tr id="tr_btn">
-				<td colspan="2" align="center"><c:if
-						test="${member.id == article.id }">
+				<td colspan="2" align="center">
+					<%-- 로그인 ID가 작성자 ID와 같은 경우에만 수정하기, 삭젭하기 버튼이 표시 --%>
+					<c:if test="${member.id == article.id }">
 						<input type=button value="수정하기" onClick="fn_enable(this.form)">
-						<input type=button value="삭제하기"
-							onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.articleNO})">
-					</c:if> <input type=button value="리스트로 돌아가기"
-					onClick="backToList(this.form)"> <input type=button
-					value="답글쓰기"
-					onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.articleNO})">
+						<input 
+							type=button 
+							value="삭제하기"
+							onClick="fn_remove_article('${contextPath}/board/removeArticle.do', 
+							${article.articleNO})"
+						>
+					</c:if> 
+					<input 
+						type=button 
+						value="리스트로 돌아가기"
+						onClick="backToList(this.form)"
+					> 
+					<input 
+						type=button
+						value="답글쓰기"
+						onClick="fn_reply_form('${contextPath}/board/replyForm.do', 
+						${article.articleNO})"
+					>
 				</td>
 			</tr>
 		</table>

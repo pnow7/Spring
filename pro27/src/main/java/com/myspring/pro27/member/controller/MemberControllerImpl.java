@@ -18,11 +18,14 @@ import com.myspring.pro27.member.vo.MemberVO;
 
 @Controller("memberController")
 public class MemberControllerImpl implements MemberController {
+	
 	@Autowired
 	private MemberService memberService;
+	
 	@Autowired
 	private MemberVO memberVO;
 
+	
 	@Override
 	@RequestMapping(value = "/member/listMembers.do", method = RequestMethod.GET)
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -92,6 +95,8 @@ public class MemberControllerImpl implements MemberController {
 			viewName = viewName.substring(0, viewName.lastIndexOf("."));
 		}
 		if (viewName.lastIndexOf("/") != -1) {
+			// /member/listMembers.do로 요청할 경우 
+			// member/listMember를 파일 이름으로 가져옴
 			viewName = viewName.substring(viewName.lastIndexOf("/"), viewName.length());
 		}
 		return viewName;

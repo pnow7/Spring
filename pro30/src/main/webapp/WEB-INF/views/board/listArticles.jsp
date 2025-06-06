@@ -25,9 +25,15 @@ request.setCharacterEncoding("UTF-8");
 <script>
 	function fn_articleForm(isLogOn, articleForm, loginForm) {
 		if (isLogOn != '' && isLogOn != 'false') {
+			/* 로그인 상태이면 글쓰기창으로 이동 */
 			location.href = articleForm;
-		} else {
+		} 
+		else {
 			alert("로그인 후 글쓰기가 가능합니다.")
+			/* 
+			로그아웃 상태이면 action 값으로 
+			다음에 수행할 URL인 /board/articleForm.do를 전달하고 로그인창으로 이동 
+			*/
 			location.href = loginForm + '?action=/board/articleForm.do';
 		}
 	}
@@ -41,7 +47,7 @@ request.setCharacterEncoding("UTF-8");
 			<td>작성일</td>
 		</tr>
 		<c:choose>
-			<c:when test="${articlesList ==null }">
+			<c:when test="${articlesList == null }">
 				<tr height="10">
 					<td colspan="4">
 						<p align="center">
@@ -51,13 +57,14 @@ request.setCharacterEncoding("UTF-8");
 				</tr>
 			</c:when>
 			<c:when test="${articlesList !=null }">
-				<c:forEach var="article" items="${articlesList }"
-					varStatus="articleNum">
+				<c:forEach var="article" items="${articlesList }" varStatus="articleNum">
 					<tr align="center">
 						<td width="5%">${articleNum.count}</td>
 						<td width="10%">${article.id }</td>
-						<td align='left' width="35%"><span
-							style="padding-right: 30px"></span> <c:choose>
+						<td align='left' width="35%">
+						<span style="padding-right: 30px"></span> 
+							<c:choose>
+							<!-- level이 1보다 크면 답글을 표시 -->
 								<c:when test='${article.level > 1 }'>
 									<c:forEach begin="1" end="${article.level }" step="1">
 										<span style="padding-left: 20px"></span>
@@ -66,11 +73,13 @@ request.setCharacterEncoding("UTF-8");
 									<a class='cls1'
 										href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a>
 								</c:when>
+							<!-- level이 1보다 작으면 부모 글을 표시 -->
 								<c:otherwise>
 									<a class='cls1'
 										href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title }</a>
 								</c:otherwise>
-							</c:choose></td>
+							</c:choose>
+						</td>
 						<td width="10%">${article.writeDate}</td>
 					</tr>
 				</c:forEach>

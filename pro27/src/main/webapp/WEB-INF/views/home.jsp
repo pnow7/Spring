@@ -5,10 +5,17 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+	<h1>
+		Hello world!  
+	</h1>
+<!--
+	HomeController.java에 
+	model.addAttribute("serverTime", formattedDate );  
+	통해서
+	
+	브라우저에서 요청한 시각을 브라우저에 출력
+		
+-->
+	<P> The time on the server is ${serverTime}. </P>
 </body>
 </html>

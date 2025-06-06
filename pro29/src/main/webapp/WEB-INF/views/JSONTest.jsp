@@ -11,6 +11,7 @@
 <script>
 	$(function() {
 		$("#checkJson").click(function() {
+			/* 회원정보를 JSON으로 생성 */
 			var member = {
 				id : "짱구",
 				name : "짱아",
@@ -19,8 +20,13 @@
 			};
 			$.ajax({
 				type : "post",
+				
+				/*/test/info로 요청 */
 				url : "${contextPath}/test/info",
+				
 				contentType : "application/json",
+				
+				/* 회원정보를 JSON 문자열로 변환 */
 				data : JSON.stringify(member),
 				success : function(data, textStatus) {
 				},

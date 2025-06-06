@@ -12,6 +12,7 @@
 	$(function() {
 		$("#checkJson").click(function() {
 			var article = {
+				/* 새 글 정보를 JSON으로 생성 */
 				articleNO : "114",
 				writer : "박지성",
 				title : "안녕하세요",
@@ -19,8 +20,11 @@
 			};
 
 			$.ajax({
+				/* 새 글을 등록(POST)하는 메서드 호출 */
 				//type:"POST",
 				//url:"${contextPath}/boards",
+				
+				// 글 번호 114번에 대해 수정 요청
 				type : "PUT",
 				url : "${contextPath}/boards/114",
 				contentType : "application/json",
