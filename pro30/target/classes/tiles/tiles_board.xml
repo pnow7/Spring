@@ -2,13 +2,21 @@
 <!DOCTYPE tiles-definitions PUBLIC
 "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
 <tiles-definitions>
+<!-- 
+	/board/listArticles 요청에 대해 같은 경로의 listArticles.jsp를 표시
+	tiles_member.xml의 기본 레이아웃을 상속받음	
+-->
 	<definition name="/board/listArticles" extends="baseLayout">
 		<put-attribute name="title" value="글목록창" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/board/listArticles.jsp" />
 	</definition>
-
+	
+<!--  
+	/board/articleForm 요청에 대해 글쓰기창을 나타냄
+-->
 	<definition name="/board/articleForm" extends="baseLayout">
 		<put-attribute name="title" value="글쓰기창" />
 		<put-attribute name="body"

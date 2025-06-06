@@ -33,10 +33,12 @@ public class MemberControllerImpl implements MemberController {
 
 	@RequestMapping(value = { "/", "/main.do" }, method = RequestMethod.GET)
 	private ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
+		
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		return mav;
+		
 	}
 
 	@Override
@@ -59,45 +61,60 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value = "/member/addMember.do", method = RequestMethod.POST)
 	public ModelAndView addMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		
 		request.setCharacterEncoding("utf-8");
 		int result = 0;
 		result = memberService.addMember(member);
 		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
 		return mav;
+		
 	}
 
 	@Override
 	@RequestMapping(value = "/member/removeMember.do", method = RequestMethod.GET)
 	public ModelAndView removeMember(@RequestParam("id") String id, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		
 		request.setCharacterEncoding("utf-8");
 		memberService.removeMember(id);
 		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
 		return mav;
+		
 	}
 
 	@Override
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
-	public ModelAndView login(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+	// 리다이렉트 시 매개변수를 전달
+	public ModelAndView login(@ModelAttribute("member") MemberVO member, 
+							  RedirectAttributes rAttr,
+							  HttpServletRequest request, 
+							  HttpServletResponse response) throws Exception {
+		
 		ModelAndView mav = new ModelAndView();
 		memberVO = memberService.login(member);
-		//세션에 isLogOn값이 저장
+		// 세션에 isLogOn값이 저장
+		// 로그인 성공 시 조건문을 수행
 		if (memberVO != null) {
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("member", memberVO);
 			session.setAttribute("isLogOn", true);
+			
+			// 로그인 성공 시 세션에 저장된 action 값을 가져옴
 			String action = (String) session.getAttribute("action");
 			session.removeAttribute("action");
 			
-			//action : articleForm.do
+			// action : articleForm.do
+			// action 값이 null이 아니면 action 값을 뷰이름으로 지정해서 글쓰기창으로 이동
 			if (action != null) {
 				mav.setViewName("redirect:" + action);
 			} else {
 				mav.setViewName("redirect:/member/listMembers.do");
 			}
-
-		} else {
+				
+		}
+		// 로그인 실패 시 다시 로그인창으로 이동
+		else {
 			rAttr.addAttribute("result", "loginFailed");
 			mav.setViewName("redirect:/member/loginForm.do");
 		}
@@ -117,15 +134,22 @@ public class MemberControllerImpl implements MemberController {
 	
 	//action : board/articleForm.do
 	@RequestMapping(value = "/member/*Form.do", method = RequestMethod.GET)
-	private ModelAndView form(@RequestParam(value = "result", required = false) String result,
-			@RequestParam(value = "action", required = false) String action, HttpServletRequest request,
+	private ModelAndView form(
+			@RequestParam(value = "result", required = false) String result,
+			@RequestParam(value = "action", required = false) String action, 
+			HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		
 		String viewName = (String) request.getAttribute("viewName");
 		System.out.println("=============MemberControllerImpl form viewName:" + viewName);
 		System.out.println("action:" + action);
 		System.out.println("result:" + result);
+		
 		HttpSession session = request.getSession();
+		
+		//글쓰기창 요청명을 action 속성으로 세션에 저장
 		session.setAttribute("action", action);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result", result);
 		mav.setViewName(viewName);

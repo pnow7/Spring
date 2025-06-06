@@ -130,7 +130,10 @@ public class BoardControllerImpl implements BoardController {
 	
 	// 글쓰기창을 나타냄
 	@RequestMapping(value = "/board/*Form.do", method = { RequestMethod.GET, RequestMethod.POST })
-	private ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	private ModelAndView form(
+			HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+		
 		//viewName : articleForm
 		String viewName = (String) request.getAttribute("viewName");
 		System.out.println("=============BoardControllerImpl form viewName:" + viewName);

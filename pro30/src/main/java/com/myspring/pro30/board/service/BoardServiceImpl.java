@@ -17,7 +17,8 @@ public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	BoardDAO boardDAO;
-
+	
+	// boardDAO의 selectAllArticlesList() 메서드 호출
 	public List<ArticleVO> listArticles() throws Exception {
 		List<ArticleVO> articlesList = boardDAO.selectAllArticlesList();
 		return articlesList;

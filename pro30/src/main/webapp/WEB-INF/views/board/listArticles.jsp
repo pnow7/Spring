@@ -87,10 +87,12 @@ request.setCharacterEncoding("UTF-8");
 		</c:choose>
 	</table>
 	<!-- <a  class="cls1"  href="#"><p class="cls2">글쓰기</p></a> -->
+	
+	<!-- 현재 로그인 상태를 함수 인자(${isLogOn})로 미리 전달 -->
+	<!-- 로그인 상태일 경우 이동할 글쓰기창 요청 URL을 인자로 전달 -->
+	<!-- 로그인 상태가 아닐 경우 로그인창 요청 URL을 전달 -->
 	<a class="cls1"
-		href="javascript:fn_articleForm('${isLogOn}',
-		'${contextPath}/board/articleForm.do', 
-        '${contextPath}/member/loginForm.do')"
+		href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do', '${contextPath}/member/loginForm.do')"
     >
     <p class="cls2">글쓰기</p></a>
 </body>
