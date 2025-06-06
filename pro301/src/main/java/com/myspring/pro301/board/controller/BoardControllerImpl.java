@@ -1,4 +1,4 @@
-package com.myspring.pro30.board.controller;
+package com.myspring.pro301.board.controller;
 
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -20,11 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myspring.pro30.board.service.BoardService;
-import com.myspring.pro30.board.vo.ArticleVO;
-import com.myspring.pro30.member.vo.MemberVO;
-
-//controller : 요청받는 곳
+import com.myspring.pro301.board.service.BoardService;
+import com.myspring.pro301.board.vo.ArticleVO;
+import com.myspring.pro301.member.vo.MemberVO;
 
 @Controller("boardController")
 public class BoardControllerImpl implements BoardController {
@@ -38,7 +36,6 @@ public class BoardControllerImpl implements BoardController {
 	@Override
 	@RequestMapping(value = "/board/listArticles.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//viewName : listArticle
 		String viewName = (String) request.getAttribute("viewName");
 		System.out.println("=============BoardControllerImpl listArticles viewName:" + viewName);
 		List articlesList = boardService.listArticles();
@@ -107,7 +104,6 @@ public class BoardControllerImpl implements BoardController {
 
 	@RequestMapping(value = "/board/*Form.do", method = { RequestMethod.GET, RequestMethod.POST })
 	private ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//viewName : articleForm
 		String viewName = (String) request.getAttribute("viewName");
 		System.out.println("=============BoardControllerImpl form viewName:" + viewName);
 		ModelAndView mav = new ModelAndView();

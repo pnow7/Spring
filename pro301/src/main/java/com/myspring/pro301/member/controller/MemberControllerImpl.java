@@ -1,4 +1,4 @@
-package com.myspring.pro30.member.controller;
+package com.myspring.pro301.member.controller;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.myspring.pro30.member.service.MemberService;
-import com.myspring.pro30.member.vo.MemberVO;
+import com.myspring.pro301.member.service.MemberService;
+import com.myspring.pro301.member.vo.MemberVO;
 
 @Controller("memberController")
 public class MemberControllerImpl implements MemberController {
@@ -76,46 +76,43 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 
-	@Override
-	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
-	public ModelAndView login(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		memberVO = memberService.login(member);
-		//세션에 isLogOn값이 저장
-		if (memberVO != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("member", memberVO);
-			session.setAttribute("isLogOn", true);
-			String action = (String) session.getAttribute("action");
-			session.removeAttribute("action");
-			
-			//action : articleForm.do
-			if (action != null) {
-				mav.setViewName("redirect:" + action);
-			} else {
-				mav.setViewName("redirect:/member/listMembers.do");
-			}
+//	@Override
+//	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
+//	public ModelAndView login(@ModelAttribute("member") MemberVO member,
+//				              RedirectAttributes rAttr,
+//		                      HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		ModelAndView mav = new ModelAndView();
+//		memberVO = memberService.login(member);
+//		if(memberVO != null) {
+//		    HttpSession session = request.getSession();
+//		    session.setAttribute("member", memberVO);
+//		    session.setAttribute("isLogOn", true);
+//		    String action = (String)session.getAttribute("action");
+//		    session.removeAttribute("action");
+//		    if(action!= null) {
+//		       mav.setViewName("redirect:"+action);
+//		    }else {
+//		       mav.setViewName("redirect:/member/listMembers.do");	
+//		    }
+//	
+//		}else {
+//		   rAttr.addAttribute("result","loginFailed");
+//		   mav.setViewName("redirect:/member/loginForm.do");
+//		}
+//		return mav;
+//	}
 
-		} else {
-			rAttr.addAttribute("result", "loginFailed");
-			mav.setViewName("redirect:/member/loginForm.do");
-		}
-		return mav;
-	}
+//	@Override
+//	@RequestMapping(value = "/member/logout.do", method =  RequestMethod.GET)
+//	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		HttpSession session = request.getSession();
+//		session.removeAttribute("member");
+//		session.removeAttribute("isLogOn");
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("redirect:/member/listMembers.do");
+//		return mav;
+//	}	
 
-	@Override
-	@RequestMapping(value = "/member/logout.do", method = RequestMethod.GET)
-	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		HttpSession session = request.getSession();
-		session.removeAttribute("member");
-		session.removeAttribute("isLogOn");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/member/listMembers.do");
-		return mav;
-	}
-	
-	//action : board/articleForm.do
 	@RequestMapping(value = "/member/*Form.do", method = RequestMethod.GET)
 	private ModelAndView form(@RequestParam(value = "result", required = false) String result,
 			@RequestParam(value = "action", required = false) String action, HttpServletRequest request,
